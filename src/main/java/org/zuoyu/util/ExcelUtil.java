@@ -77,7 +77,7 @@ public class ExcelUtil {
             response.setCharacterEncoding("utf-8");
             String fileName = URLEncoder.encode(name, "UTF-8");
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
-            EasyExcel.write(response.getOutputStream(), head).autoCloseStream(Boolean.FALSE).sheet(sheetName).doWrite(data);
+            EasyExcel.write(response.getOutputStream(), head).autoCloseStream(Boolean.FALSE).sheet(sheetName).registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()).doWrite(data);
         } catch (Exception e) {
             response.reset();
             response.setContentType("application/json");
